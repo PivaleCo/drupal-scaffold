@@ -105,7 +105,6 @@ Use: `drush help site-install` for more argument options.
 * Add your custom module(s) to web/modules/custom
 * Add your static non-PHP libraries to web/libraries
 
-
 ## For contributing
 
 Fork the repo on GitHub and submit pull requests!
