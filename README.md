@@ -8,16 +8,17 @@ Areas for improvement are welcome through pull requests.
 
 ## Prerequisites
 
-* [Composer](https://getcomposer.org/) installed on your development and production environments
+* [Composer](https://getcomposer.org/) installed on your development and production environments.
 * A working MySQL or MariaDB database already set up with user permissions set.
-* You have a remote git repository available and set up to accept your git pushes.
+* You have a remote git repository available and set up to accept your new project's git pushes.
 
 ## Get going
 
-**1. Clone this repository.**
+**1. Clone this repository and navigate inside.**
 
 ```bash
 git clone --depth=1 --branch=master git@github.com:reallifedigital/drupal-scaffold.git PROJECT_DIRECTORY
+cd PROJECT_DIRECTORY
 ```
 
 where `PROJECT_DIRECTORY` is the destination directory for the project.
@@ -25,7 +26,7 @@ where `PROJECT_DIRECTORY` is the destination directory for the project.
 **2. Remove the .git directory so you can make your own git history.**
 
 ```bash
-rm -rf !$/.git
+rm -rf .git
 ```
 
 **3. Initialise your repository**
@@ -45,7 +46,7 @@ Alter `user`, `server` and `repository` above to suit your needs.
 **5. Create initial commit**
 
 ```bash
-git commit -a -m "Initial scaffold commit"
+git add . && git commit -m "Initial scaffold commit"
 ```
 
 **6. Push master branch to your remote**
@@ -105,9 +106,56 @@ Use: `drush help site-install` for more argument options.
 * Add your custom module(s) to web/modules/custom
 * Add your static non-PHP libraries to web/libraries
 
-## For contributing
+**12. Install contrib modules and themes with composer**
 
-Fork the repo on GitHub and submit pull requests!
+```bash
+composer require drupal/PROJECT_NAME
+```
+
+**Tip:** to see available drupal project versions, run:
+
+```bash
+composer show -a drupal/PROJECT_NAME | grep versions
+```
+
+and then run, for example:
+
+```bash
+composer require "drupal/PROJECT_NAME:1.0.0"
+```
+
+where `PROJECT_NAME` is the project name at https://drupal.org/project/`PROJECT_NAME`
+
+**13. For any patches to be applied, update composer.json**
+
+First, ensure there is an upstream issue on drupal.org. Add an entry the patches section of the `composer.json` file.
+
+Format to capture key information about the patch should be:
+
+```json
+{
+    "extra": {
+        "patches": {
+            "Module:Version, Issue description, Issue + Comment URL": "https://www.drupal.org/files/issues/example.patch"
+        }
+    }
+}
+```
+
+For example:
+```json
+{
+    "extra": {
+        "patches": {
+            "Address:8.x-1.x-dev, Add field settings for global overrides of required/optional behavior, https://www.drupal.org/node/2514126#comment-11917633": "https://www.drupal.org/files/issues/2514126-49.field-behavior-settings-as-table.patch"
+        }
+    }
+}
+```
+
+* Remember that this is a JSON object - the last patch in the list should not have a trailing comma.
+* Remember that composer.json file use 4 spaces for indentation.
+* Remember to run `composer install` after updating patch entries.
 
 ## Further notes
 
@@ -115,6 +163,10 @@ Fork the repo on GitHub and submit pull requests!
 * Uses the [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) project
 * .gitignore file handles common use case, but may need to be tweaked to suit your own project
 * Once you've run composer you should commit the composer.lock file. This file is not git-ignored.
+
+## For contributing to this project
+
+Fork the repo on GitHub and submit pull requests. All feedback is appreciated.
 
 **Author: Barry Fisher**
 
