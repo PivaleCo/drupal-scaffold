@@ -37,7 +37,7 @@ git init && git config core.filemode false
 **4. Optionally set your remote repository**
 
 ```bash
-git remote add origin git://user@server:repository
+git remote add origin git:://user@server:repository
 ```
 
 Alter `user`, `server` and `repository` above to suit your needs.
