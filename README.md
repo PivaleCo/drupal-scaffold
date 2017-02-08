@@ -11,6 +11,8 @@ Areas for improvement are welcome through pull requests.
 * [Composer](https://getcomposer.org/) installed on your development and production environments.
 * A working MySQL or MariaDB database already set up with user permissions set.
 * You have a remote git repository available and set up to accept your new project's git pushes.
+* You have a means of serving the web root from `PROJECT_DIRECTORY`/web wherever you place it on your filesystem.
+* MAMP or LAMP stack set up as per [drupal.org system requirements documentation](https://www.drupal.org/docs/7/system-requirements/web-server)
 
 ## Get going
 
@@ -163,10 +165,16 @@ For example:
 * Uses the [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) project
 * .gitignore file handles common use case, but may need to be tweaked to suit your own project
 * Once you've run composer you should commit the composer.lock file. This file is not git-ignored.
+* `www` symlink is in place for legacy support.
 
 ## For contributing to this project
 
 Fork the repo on GitHub and submit pull requests. All feedback is appreciated.
+
+## Further reading:
+
+* [Custom Drupal 8 theme up and running with Sass, Singularity, Breakpoint, LiveReload and Gulp](http://www.reallifedigital.com/blog/how-we-got-custom-drupal-8-theme-and-running-sass-singularity-breakpoint-livereload-and-gulp)
+* [Drupal's Coding standards](https://www.drupal.org/docs/develop/standards)
 
 **Author: Barry Fisher**
 
