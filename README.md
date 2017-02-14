@@ -57,11 +57,13 @@ git add . && git commit -m "Initial scaffold commit"
 git push origin master
 ```
 
-**7. Build out the scaffold with composer**
+**7. Build out the scaffold with the included build script**
 
 ```bash
-composer install && composer drupal-scaffold
+./build
 ```
+
+Note: this build script can be used in the general development workflow to build new dependencies. See the contents of this file for more information on building with dev dependencies.
 
 **8. Create a settings.php file**
 

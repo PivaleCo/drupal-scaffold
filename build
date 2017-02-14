@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Build script for Drupal 8 projects.
+#
+# Runs composer install, composer drupal-scaffold and npm install in custom themes.
+# Run './build dev' if you require composer and npm to install dev dependencies.
+
+RED='\033[0;31m' # Red
+YELLOW='\033[0;33m' # Yellow
+NC='\033[0m' # No Color
+
+DEPLOYMENT_ENVIRONMENT=$1
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+
+# Navigate back up to the git root if in a sub directory.
+cd $GIT_ROOT
+
+env -i git checkout -f
+env -i git submodule update --init --recursive
+
+# Check if a composer.json file is present.
+if [ -f composer.json ]; then
+
+  # Install or update packages specified in the lock file.
+
+  # Check deployment environment for the correct argument for composer install.
+  if [ "$DEPLOYMENT_ENVIRONMENT" == "dev" ]; then
+    echo -e "\n${YELLOW}*** Running 'composer install --optimize-autoloader' ***${NC}\n"
+    composer install --optimize-autoloader
+  else
+    echo -e "\n${YELLOW}*** Running 'composer install --no-dev --optimize-autoloader' ***${NC}\n"
+    composer install --no-dev --optimize-autoloader
+  fi
+
+fi
+
+# Check if index.php file is present..
+if [ ! -f web/index.php ]; then
+
+  # Install drupal-scaffold files.
+  echo -e "\n${YELLOW}*** Running 'composer drupal-scaffold' ***${NC}\n"
+  composer drupal-scaffold
+
+fi
+
+# Custom theme build with npm.
+if [ -d web/themes/custom ]; then
+
+  for THEME_DIR in $(ls -d web/themes/custom/*/)
+  do
+
+    # Check npm is installed.
+    NPM_EXISTS=$(command -v npm) || { echo -e >&2 "${RED}npm is required but it's not installed. Skipping npm install in "$THEME_DIR"${NC}"; }
+
+    if [ -n "$NPM_EXISTS" ]; then
+
+      MANIFEST_FILE="package.json"
+
+      if [ -f "$THEME_DIR$MANIFEST_FILE" ]; then
+
+        # Check deployment environment for the correct argument for npm install.
+        if [ "$DEPLOYMENT_ENVIRONMENT" == "dev" ]; then
+
+          echo -e "\n${YELLOW}*** Running 'npm install' in "$THEME_DIR" ***${NC}\n"
+          cd $THEME_DIR
+          npm install
+
+        else
+
+          echo -e "\n${YELLOW}*** Running 'npm install --production' in "$THEME_DIR" ***${NC}\n"
+          cd $THEME_DIR
+          npm install --production
+
+        fi
+
+      fi
+
+    fi
+
+  done
+
+fi
+
+# Navigate back up to the git root if in a sub directory.
+cd $GIT_ROOT
