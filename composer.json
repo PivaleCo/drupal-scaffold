@@ -75,6 +75,7 @@
         "drupal/drupal": "*"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "bin-dir": "bin/"
     }
 }
