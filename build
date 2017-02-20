@@ -16,8 +16,8 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 # Navigate back up to the git root if in a sub directory.
 cd $GIT_ROOT
 
-env -i git checkout -f
-env -i git submodule update --init --recursive
+#env -i git checkout -f
+#env -i git submodule update --init --recursive
 
 # Check if a composer.json file is present.
 if [ -f composer.json ]; then
