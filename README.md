@@ -140,7 +140,9 @@ Format to capture key information about the patch should be:
 {
     "extra": {
         "patches": {
-            "Module:Version, Issue description, Issue + Comment URL": "https://www.drupal.org/files/issues/example.patch"
+            "owner/repo": {
+                "Module:Version, Issue description, Issue + Comment URL": "https://www.drupal.org/files/issues/example.patch"
+            }
         }
     }
 }
@@ -151,7 +153,9 @@ For example:
 {
     "extra": {
         "patches": {
-            "Address:8.x-1.x-dev, Add field settings for global overrides of required/optional behavior, https://www.drupal.org/node/2514126#comment-11917633": "https://www.drupal.org/files/issues/2514126-49.field-behavior-settings-as-table.patch"
+            "drupal/address": {
+                "Address:8.x-1.x-dev, Add field settings for global overrides of required/optional behavior, https://www.drupal.org/node/2514126#comment-11917633": "https://www.drupal.org/files/issues/2514126-49.field-behavior-settings-as-table.patch"
+            }
         }
     }
 }
