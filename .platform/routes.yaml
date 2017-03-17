@@ -1,0 +1,20 @@
+"https://reallifedigital.com/":
+  type: redirect
+  to: "https://{default}/"
+"https://{default}/":
+  cache:
+    cookies:
+    - '*'
+    default_ttl: 60
+    enabled: true
+    headers:
+    - Accept
+    - Accept-Language
+    - X-Language-Locale
+  redirects:
+    expires: -1s
+    paths: {}
+  ssi:
+    enabled: true
+  type: upstream
+  upstream: app:http

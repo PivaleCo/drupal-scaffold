@@ -1,0 +1,1 @@
+This is the recommended location for Drupal exported configuration

@@ -1,8 +1,22 @@
 # Drupal 8 scaffold
 
-## A springboard project for new Drupal 8 projects, using as many standards and best practices as possible.
+## A springboard project for new Drupal 8 projects.
 
-Some areas may be opinionated towards the internal best practices at Real Life Digital.
+Some areas may be opinionated towards the internal best practices at Real Life Digital, but will stick to community accepted standards as closely as possible.
+
+Provides integration with [platform.sh](https://platform.sh), but isn't dependent on its use. Notably there are some platform.sh sensible default files at:
+
+* .platform.app.yaml
+* .platform/routes.yaml
+* .platform/services.yaml
+* web/sites/default/settings.platformsh.php
+* (Include statement in web/sites/default/example.settings.php)
+
+This project differs from the [Drupal 8 project template for Platform.sh](https://github.com/platformsh/platformsh-example-drupal8) in that it uses the [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) to build Drupal's scaffolded files (`index.php`, `.htaccess` etc) required on top of the composer dependencies, rather than including them here in this repo.
+
+This project also aims to provide step-by-step documentation to speed up the roll up time for new projects.
+
+## Improvements
 
 Areas for improvement are welcome through pull requests.
 
@@ -48,16 +62,33 @@ Alter `user`, `server` and `repository` above to suit your needs.
 **5. Create initial commit**
 
 ```bash
-git add . && git commit -m "Initial scaffold commit"
+git add . && git commit -m "Initial commit"
 ```
 
-**6. Push master branch to your remote**
+**6. Add your remote git repository location**
+
+Note: Ensure permissions are set up on the remote repository (i.e. with your SSH key).
+
+```bash
+git remote add origin USER@SERVER:REPO
+```
+
+Note: for [platform.sh](https://platform.sh) use:
+
+```bash
+git remote add origin PROJECT_ID@git.LOCATION.platform.sh:PROJECT_ID.git
+```
+
+Replace PROJECT_ID with the ID seen in the platform.sh UI, and LOCATION with the location which the platform is set up: e.g. 'eu'.
+
+**7. Push master branch to your remote**
 
 ```bash
 git push origin master
 ```
 
-**7. Build out the scaffold with the included build script**
+
+**8. Build out the scaffold with the included build script**
 
 ```bash
 ./build
@@ -65,7 +96,7 @@ git push origin master
 
 Note: this build script can be used in the general development workflow to build new dependencies. See the contents of this file for more information on building with dev dependencies.
 
-**8. Create a settings.php file**
+**9. Create a settings.php file**
 
 ```bash
 cp web/sites/default/example.settings.php web/sites/default/settings.php
@@ -75,7 +106,7 @@ The example file contains sensible defaults which you can alter for the needs of
 
 Any changes you make to settings.php should be for **all** environments and should be checked into your git repository. This file is **not** git-ignored.
 
-**9. Set up you setting.local.php file**
+**10. Set up you setting.local.php file**
 
 ```bash
 cp web/sites/default/example.development.settings.local.php web/sites/default/settings.local.php
@@ -86,7 +117,7 @@ Any changes you make to settings.local.php should be for the current environment
 
 Edit the file at `web/sites/default/settings.local.php` and set the `$databases` array with your database settings.
 
-**10. Install Drupal**
+**11. Install Drupal**
 
 Either through the web interface:
 
@@ -104,19 +135,19 @@ Obviously, replace the placeholder argument above with sensible values.
 
 Use: `drush help site-install` for more argument options.
 
-**11. Add your custom code**
+**12. Add your custom code**
 
 * Add your custom theme(s) to web/themes/custom
 * Add your custom module(s) to web/modules/custom
 * Add your static non-PHP libraries to web/libraries
 
-**12. Install contrib modules and themes with composer**
+**13. Install contrib modules and themes with composer**
 
 ```bash
 composer require drupal/PROJECT_NAME
 ```
 
-**Tip:** to see available drupal project versions, run:
+**Tip:** to see available drupal project (module) versions, run:
 
 ```bash
 composer show -a drupal/PROJECT_NAME | grep versions
@@ -167,7 +198,7 @@ For example:
 
 ## Further notes
 
-* Config files located in web/sites/default/files are *not* git-ignored, so are safe to include
+* Config files located in web/sites/default/files are *not* git-ignored, so are safe to include, however, it's recommended to place the config exports outside the web root in the `../config/` directory. The `example.settings.php` file adds this as the default config directory.
 * Uses the [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) project
 * .gitignore file handles common use case, but may need to be tweaked to suit your own project
 * Once you've run composer you should commit the composer.lock file. This file is not git-ignored.
@@ -184,4 +215,4 @@ Fork the repo on GitHub and submit pull requests. All feedback is appreciated.
 
 **Author: Barry Fisher**
 
-**Last updated: 2016-02-08**
+**Last updated: 2016-03-17**

@@ -758,4 +758,4 @@ if (file_exists(__DIR__ . '/settings.platformsh.php')) {
   include __DIR__ . '/settings.platformsh.php';
 }
 
-$settings['install_profile'] = 'standard';
+$config_directories['sync'] = '../config/sync';
