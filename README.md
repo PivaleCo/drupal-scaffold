@@ -51,21 +51,7 @@ rm -rf .git
 git init && git config core.filemode false
 ```
 
-**4. Optionally set your remote repository**
-
-```bash
-git remote add origin user@server:repository
-```
-
-Alter `user`, `server` and `repository` above to suit your needs.
-
-**5. Create initial commit**
-
-```bash
-git add . && git commit -m "Initial commit"
-```
-
-**6. Add your remote git repository location**
+**4. Add your remote git repository location**
 
 Note: Ensure permissions are set up on the remote repository (i.e. with your SSH key).
 
@@ -73,22 +59,29 @@ Note: Ensure permissions are set up on the remote repository (i.e. with your SSH
 git remote add origin USER@SERVER:REPO
 ```
 
+Alter `USER`, `SERVER` and `REPO` above to suit your needs.
+
 Note: for [platform.sh](https://platform.sh) use:
 
 ```bash
 git remote add origin PROJECT_ID@git.LOCATION.platform.sh:PROJECT_ID.git
 ```
 
-Replace PROJECT_ID with the ID seen in the platform.sh UI, and LOCATION with the location which the platform is set up: e.g. 'eu'.
+Replace `PROJECT_ID` with the ID seen in the platform.sh UI, and `LOCATION` with the location which the platform is set up: e.g. 'eu'.
 
-**7. Push master branch to your remote**
+**5. Create initial commit**
+
+```bash
+git add . && git commit -m "Initial commit"
+```
+
+**6. Push master branch to your remote**
 
 ```bash
 git push origin master
 ```
 
-
-**8. Build out the scaffold with the included build script**
+**7. Build out the scaffold with the included build script**
 
 ```bash
 ./build
@@ -96,7 +89,7 @@ git push origin master
 
 Note: this build script can be used in the general development workflow to build new dependencies. See the contents of this file for more information on building with dev dependencies.
 
-**9. Create a settings.php file**
+**8. Create a settings.php file**
 
 ```bash
 cp web/sites/default/example.settings.php web/sites/default/settings.php
@@ -106,7 +99,7 @@ The example file contains sensible defaults which you can alter for the needs of
 
 Any changes you make to settings.php should be for **all** environments and should be checked into your git repository. This file is **not** git-ignored.
 
-**10. Set up you setting.local.php file**
+**9. Set up you setting.local.php file**
 
 ```bash
 cp web/sites/default/example.development.settings.local.php web/sites/default/settings.local.php
@@ -117,7 +110,7 @@ Any changes you make to settings.local.php should be for the current environment
 
 Edit the file at `web/sites/default/settings.local.php` and set the `$databases` array with your database settings.
 
-**11. Install Drupal**
+**10. Install Drupal**
 
 Either through the web interface:
 
@@ -135,13 +128,13 @@ Obviously, replace the placeholder argument above with sensible values.
 
 Use: `drush help site-install` for more argument options.
 
-**12. Add your custom code**
+**11. Add your custom code**
 
 * Add your custom theme(s) to web/themes/custom
 * Add your custom module(s) to web/modules/custom
 * Add your static non-PHP libraries to web/libraries
 
-**13. Install contrib modules and themes with composer**
+**12. Install contrib modules and themes with composer**
 
 ```bash
 composer require drupal/PROJECT_NAME
