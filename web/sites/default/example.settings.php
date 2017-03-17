@@ -759,3 +759,4 @@ if (file_exists(__DIR__ . '/settings.platformsh.php')) {
 }
 
 $config_directories['sync'] = '../config/sync';
+$settings['file_private_path'] = '../private';
