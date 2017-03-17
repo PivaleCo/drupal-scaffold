@@ -36,6 +36,9 @@ web/sites/*/*
 web/sites/*/files/*
 !web/sites/*/files/config*
 
+# Include settings.platformsh.php
+!web/sites/*/settings.platformsh.php
+
 # Include the libraries directory
 !web/libraries
 
